@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://comrxnj7ys3ks"]
+
+[ext_resource type="PackedScene" uid="uid://c4o4d5vvyx8fh" path="res://assets/models/hero.glb" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://178csn7tlyke" path="res://hero.gd" id="1_fj7yv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_fj7yv"]
+sky_material = SubResource("ProceduralSkyMaterial_f3sb7")
+
+[sub_resource type="Environment" id="Environment_tlwt5"]
+background_mode = 2
+sky = SubResource("Sky_fj7yv")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_fj7yv"]
+size = Vector3(20, 0.1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tlwt5"]
+size = Vector3(20, 0.1, 20)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_aqk2v"]
+radius = 0.9992938
+
+[node name="world" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tlwt5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9694625, -0.2123839, 0.12261982, 2.7805946e-08, 0.49999994, 0.86602545, -0.24523976, -0.8395792, 0.48473114, -0.93607926, 6.35492, 8.780637)
+shadow_enabled = true
+
+[node name="platform" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="platform"]
+mesh = SubResource("BoxMesh_fj7yv")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platform"]
+shape = SubResource("BoxShape3D_tlwt5")
+metadata/_edit_lock_ = true
+
+[node name="hero" type="CharacterBody3D" parent="."]
+script = ExtResource("1_fj7yv")
+
+[node name="hero" parent="hero" instance=ExtResource("1_f3sb7")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.1125271, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hero"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1607256, 0)
+shape = SubResource("SphereShape3D_aqk2v")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.78047407, 0.6251882, 0, -0.6251882, 0.78047407, 0, 5.0383835, 5.91799)
