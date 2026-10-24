@@ -48,5 +48,7 @@ func _input(event: InputEvent) -> void:
 		inst.transform = %ray_gun.global_transform
 		get_tree().current_scene.add_child(inst)
 		
+	if Input.is_key_pressed(KEY_S):
+		rotate_y(0.1)
 	if Input.is_key_pressed(KEY_D):
-		rotate_y(0.1)	
+		rotate_y(-0.1)	
