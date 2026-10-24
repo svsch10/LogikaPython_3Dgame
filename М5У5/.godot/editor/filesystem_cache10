@@ -1,0 +1,15 @@
+78098b89c88a74ebe8c20117b8754620
+::res://::1792848106
+bullet.gd::GDScript::2318270526806249432::1792791295::0::1::::<>RigidBody3D<><>0<>0<><>::
+bullet.tscn::PackedScene::8252981172443036048::1792791295::0::1::::<><><>0<>0<><>::uid://8a8tu4ocpeui::::res://bullet.gd
+enemy.gd::GDScript::1156748774186050414::1792791295::0::1::::<>CharacterBody3D<><>0<>0<><>::
+enemy.tscn::PackedScene::367671333205591334::1792791295::0::1::::<><><>0<>0<><>::uid://qqlqox6r1vxm::::res://enemy.gd<>uid://dbsa4pfsr1iwq::::res://assets/models/enemy.glb
+hero.gd::GDScript::1892978222050402304::1792791295::0::1::::<>CharacterBody3D<><>0<>0<><>::
+house.tscn::PackedScene::4640433547317283438::1792791295::0::1::::<><><>0<>0<><>::uid://b4ac25dgsldj1::::res://assets/models/house.glb
+icon.svg::CompressedTexture2D::2345801625464717285::1792791295::1792791295::1::::<><><>0<>0<>98e954a74e4d76de9c4a39eaec1abed8<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+world.tscn::PackedScene::5781331671697752742::1792791295::0::1::::<><><>0<>0<><>::uid://c4o4d5vvyx8fh::::res://assets/models/hero.glb<>uid://178csn7tlyke::::res://hero.gd<>uid://b7d4i6rg87bcw::::res://house.tscn<>uid://fidq1cnlctdu::::res://enemy.tscn
+::res://assets/::1792791295
+::res://assets/models/::1792791295
+enemy.glb::PackedScene::7266662278729515004::1792791295::1792791295::1::::<><><>0<>0<>14f200dd7b8df5e07c98a6dcb675bb2f<>res://.godot/imported/enemy.glb-8d6ef1d5b61721d75a6519297be331dc.scn::
+hero.glb::PackedScene::6838986880746475597::1792791295::1792791295::1::::<><><>0<>0<>ceac5cd7f045c760053c62dff4cb00ea<>res://.godot/imported/hero.glb-2ed7d39ad98e6f5e3acea744920685b3.scn::
+house.glb::PackedScene::4422068380249025616::1792791295::1792791295::1::::<><><>0<>0<>3365bc7e21f17bc4258d7a0fe5322cf6<>res://.godot/imported/house.glb-1974b53afbc06013dc2fc6f61f1c678d.scn::
