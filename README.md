@@ -1,5 +1,5 @@
 <img width="315" height="256" alt="image" src="https://github.com/user-attachments/assets/90705af2-4d2a-490a-9f27-0ddfed8998b1" /> <img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/959d13d2-6dad-4af1-8f55-a9d1e7ab6190" />
-## 1. Blender — створення 3D-персонажа
+## Blender — створення 3D-персонажа
 
 **1. Налаштування робочого середовища**  
 * Запустити Blender (будь-яка версія від 2.8 і вище).  
@@ -21,7 +21,7 @@
 * Зберегти файл персонажа у форматі **.blend** в папку **assets/models**.  
 * Експортувати модель у форматі **.gltf** в папку **assets/models**.
 
-## 2. Godot — імпорт і рух персонажа
+## Godot — імпорт і рух персонажа
 
 **1. Створення проєкту**  
 + Запустити Godot.  
