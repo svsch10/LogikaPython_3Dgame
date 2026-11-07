@@ -1,0 +1,186 @@
+[gd_scene load_steps=20 format=3 uid="uid://comrxnj7ys3ks"]
+
+[ext_resource type="PackedScene" uid="uid://c4o4d5vvyx8fh" path="res://assets/models/hero.glb" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://178csn7tlyke" path="res://hero.gd" id="1_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://b7d4i6rg87bcw" path="res://house.tscn" id="3_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://fidq1cnlctdu" path="res://enemy.tscn" id="4_aqk2v"]
+[ext_resource type="Texture2D" uid="uid://c1yc4ldp4dlc4" path="res://assets/aim_cross.png" id="5_036b0"]
+[ext_resource type="Texture2D" uid="uid://mowfu23ifqwb" path="res://assets/vignete.png" id="6_dwbse"]
+[ext_resource type="Texture2D" uid="uid://dnf33rk8dwp4a" path="res://assets/aim_cross_sniper.png" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://c4eyxt5vre28b" path="res://assets/models/rifle.glb" id="8_gbfbk"]
+[ext_resource type="Script" uid="uid://bmmi14w3hn8tm" path="res://rifle.gd" id="8_ioo17"]
+[ext_resource type="PackedScene" uid="uid://8wbyo5tjiy1f" path="res://assets/models/sniper_rifle.glb" id="10_wse8f"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_fj7yv"]
+sky_material = SubResource("ProceduralSkyMaterial_f3sb7")
+
+[sub_resource type="Environment" id="Environment_tlwt5"]
+background_mode = 2
+sky = SubResource("Sky_fj7yv")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
+albedo_color = Color(0.1764706, 0.4862745, 0.09019608, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fj7yv"]
+material = SubResource("StandardMaterial3D_tlwt5")
+size = Vector3(70, 0.1, 70)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tlwt5"]
+size = Vector3(70, 0.1, 70)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_aqk2v"]
+radius = 0.48418567
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ioo17"]
+radius = 0.60888875
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ic0uy"]
+radius = 0.7453952
+
+[node name="world" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tlwt5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9694625, -0.2123839, 0.12261982, 2.7805946e-08, 0.49999994, 0.86602545, -0.24523976, -0.8395792, 0.48473114, -0.93607926, 6.35492, 8.780637)
+shadow_enabled = true
+
+[node name="platform" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="platform"]
+mesh = SubResource("BoxMesh_fj7yv")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platform"]
+shape = SubResource("BoxShape3D_tlwt5")
+metadata/_edit_lock_ = true
+
+[node name="hero" type="CharacterBody3D" parent="." groups=["hero"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.4346333)
+script = ExtResource("1_fj7yv")
+
+[node name="hero" parent="hero" instance=ExtResource("1_f3sb7")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.94633746, 0)
+
+[node name="ray_gun" type="RayCast3D" parent="hero/hero/Armature/Skeleton3D/Bone_007" index="2"]
+unique_name_in_owner = true
+transform = Transform3D(-1.8913236, -0.006692088, 0.011108321, -0.011031679, -0.02147915, -1.8912143, 0.006817692, -1.8912342, 0.021439588, -0.0011785068, 1.0226249, 0.0044059753)
+target_position = Vector3(0, 0, -1)
+
+[node name="ray_rifle" type="RayCast3D" parent="hero/hero/Armature/Skeleton3D/Bone_007" index="3"]
+unique_name_in_owner = true
+transform = Transform3D(-1.8913236, -0.0066920887, 0.011108321, -0.011031679, -0.02147915, -1.8912141, 0.006817692, -1.8912342, 0.021439588, -0.004959848, 1.6675024, -0.0011174679)
+target_position = Vector3(0, 0, -30)
+
+[node name="AnimationPlayer" parent="hero/hero" index="1"]
+autoplay = "idle"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hero"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4556651, -0.35353225)
+shape = SubResource("SphereShape3D_aqk2v")
+
+[node name="camera3p" type="Camera3D" parent="hero"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.78047407, 0.6251882, 0, -0.6251882, 0.78047407, 0, 5.0383835, 4.3130803)
+current = true
+
+[node name="camera1p" type="Camera3D" parent="hero"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7755378, -0.5372561)
+
+[node name="ray_sniper_rifle" type="RayCast3D" parent="hero/camera1p"]
+unique_name_in_owner = true
+transform = Transform3D(1.891368, 0, 0, 0, 1.891368, 0, 0, 0, 1.8913683, 0, 0, 0)
+target_position = Vector3(0, 0, -50)
+
+[node name="house2" parent="." instance=ExtResource("3_tlwt5")]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 7.578841, 0, 5.0000005)
+
+[node name="house" parent="." instance=ExtResource("3_tlwt5")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.992527, 0, -1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.7358963, 0, -0.6770943, 0, 1, 0, 0.6770943, 0, -0.7358963, -0.74382496, 1.1210771, -2.9128752)
+current = true
+
+[node name="house3" parent="." instance=ExtResource("3_tlwt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.962164, 0.07540405, -1.9301739)
+
+[node name="house4" parent="." instance=ExtResource("3_tlwt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.33349, 0.07540119, 16.587458)
+
+[node name="enemy" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.6019757, 0.07540119, -9.267852)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="rifle_cross" type="TextureRect" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_036b0")
+
+[node name="vignette" type="TextureRect" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_dwbse")
+expand_mode = 2
+
+[node name="sniper_rifle_cross" type="TextureRect" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -59.5
+offset_right = 64.0
+offset_bottom = 59.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_pkg7o")
+
+[node name="rifle" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0336196, 0.8565221, 3.362547)
+axis_lock_linear_y = true
+script = ExtResource("8_ioo17")
+
+[node name="rifle" parent="rifle" instance=ExtResource("8_gbfbk")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rifle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.12509012)
+shape = SubResource("SphereShape3D_ioo17")
+
+[node name="sniper_rifle" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.911943, 0.8565221, 3.362547)
+axis_lock_linear_y = true
+script = ExtResource("8_ioo17")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sniper_rifle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.27290583)
+shape = SubResource("SphereShape3D_ic0uy")
+
+[node name="sniper_rifle" parent="sniper_rifle" instance=ExtResource("10_wse8f")]
+
+[editable path="hero/hero"]
