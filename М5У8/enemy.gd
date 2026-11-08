@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 			# Вирівнювання персонажа щоб позбавитись похибки
 			rotation.y = start_angle + PI
 			start_angle = rotation.y
-			# Робимо крок, щоб в новому напряку, щоб вийты за межі д
+			# Робимо крок в новому напрямку, щоб вийти за межі
 			direction = (transform.basis * Vector3.FORWARD).normalized()
 		
 	if direction:
