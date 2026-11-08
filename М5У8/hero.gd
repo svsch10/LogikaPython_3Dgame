@@ -32,8 +32,6 @@ var current_weapon_index = 0
 
 @onready var bullet_gun = load("res://bullet.tscn")
 
-var hp = 10
-
 
 func _ready() -> void:
 	%camera3p.current = true
@@ -163,11 +161,3 @@ func _input(event: InputEvent) -> void:
 		if weapons[current_weapon_index].name == 'sniper_rifle':
 			%camera1p.rotate_x(-event.relative.y * rotate_mouse_speed)
 			%camera1p.rotation.x = clamp(%camera1p.rotation.x, -deg_to_rad(45), deg_to_rad(45))
-
-
-func damage(amount=1):
-	hp -= amount
-	if hp <= 0:
-		print("GAME OVER!")
-		get_tree().paused = true
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
