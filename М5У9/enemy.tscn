@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://fidq1cnlctdu"]
+
+[ext_resource type="Script" uid="uid://qqlqox6r1vxm" path="res://enemy.gd" id="1_4gyqm"]
+[ext_resource type="PackedScene" uid="uid://dbsa4pfsr1iwq" path="res://assets/models/enemy.glb" id="1_7k104"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4gyqm"]
+radius = 0.72558594
+height = 2.1640625
+
+[node name="enemy" type="CharacterBody3D" groups=["enemy"]]
+script = ExtResource("1_4gyqm")
+
+[node name="enemy" parent="." instance=ExtResource("1_7k104")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="enemy/Armature_001" index="0"]
+bones/0/rotation = Quaternion(0.9133984, -0.26282185, -0.29873022, -0.085956484)
+bones/1/position = Vector3(1.6649714, 0.40701193, 3.16503)
+bones/1/rotation = Quaternion(0.69018173, 0.17778616, -0.19589236, 0.67354846)
+bones/2/position = Vector3(2.3934336, 0.5424638, 2.509514)
+bones/2/rotation = Quaternion(0.19058137, 0.62588674, 0.69166714, -0.30584502)
+bones/3/position = Vector3(-0.73079336, -0.16334656, 0.53527176)
+bones/3/rotation = Quaternion(0.98955524, -0.06392805, -0.12422219, 0.03553149)
+bones/4/rotation = Quaternion(-0.63464284, -0.0031628166, -0.2586728, 0.7282217)
+bones/5/position = Vector3(0.688291, -0.11334713, -0.4473865)
+bones/5/rotation = Quaternion(0.9895551, 0.06392738, -0.12422315, -0.0355325)
+bones/7/position = Vector3(2.1688986, 1.3790712, 2.9611406)
+
+[node name="AnimationPlayer" parent="enemy" index="1"]
+autoplay = "walk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0627172, 0)
+shape = SubResource("CapsuleShape3D_4gyqm")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.4834797, 0)
+depth = 3.0
+polygon = PackedVector2Array(5, 5, -5, 5, -5, 0, -15, -15, 15, -15, 5, 0)
+
+[node name="ray_blaster" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0577214, -2.5546937)
+target_position = Vector3(0, 0, -1)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+
+[editable path="enemy"]
