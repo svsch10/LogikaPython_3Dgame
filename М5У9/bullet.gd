@@ -6,6 +6,8 @@ extends RigidBody3D
 
 # Хто є ціллю кулі
 @export var target_group = "enemy"
+# Іскри
+@onready var sparks_shot = load("res://sparks_shot.tscn")
 
 func _ready() -> void:
 	apply_central_impulse(transform.basis * Vector3(0, 0, -speed))
@@ -18,8 +20,12 @@ func _physics_process(delta: float) -> void:
 	
 	var bodies = get_colliding_bodies()
 	for body in bodies:
+		# Додавання іскр
+		var inst = sparks_shot.instantiate()
+		inst.transform = global_transform
+		get_tree().current_scene.add_child(inst)
+		
 		if body.is_in_group(target_group):
 			if body.has_method("damage"):
 				body.damage(damage_amount)
-			queue_free()
-			return
+		queue_free()

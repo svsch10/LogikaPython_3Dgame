@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://bl38luherj3xi"]
+
+[ext_resource type="Script" uid="uid://ckl4ov3stup3f" path="res://control.gd" id="1_lti8b"]
+[ext_resource type="Texture2D" uid="uid://btl7gigwo37mk" path="res://assets/title2.png" id="2_ouk20"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ouk20"]
+bg_color = Color(0.9789197, 0.50185883, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mae5d"]
+bg_color = Color(0.9267301, 0.44199473, 0.032262042, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lti8b"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.86092234, 0, 0.23578984, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_ouk20"]
+Button/font_sizes/font_size = 28
+Button/styles/focus = SubResource("StyleBoxFlat_ouk20")
+Button/styles/hover = SubResource("StyleBoxFlat_mae5d")
+Button/styles/normal = SubResource("StyleBoxFlat_lti8b")
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lti8b")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -571.0
+offset_top = -326.5
+offset_right = 571.0
+offset_bottom = 326.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ouk20")
+expand_mode = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -121.5
+offset_top = -185.0
+offset_right = 121.5
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_ouk20")
+vertical = true
+
+[node name="play_btn" type="Button" parent="BoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="exit_btn" type="Button" parent="BoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="settings_btn" type="Button" parent="BoxContainer"]
+layout_mode = 2
+text = "Settings
+"
+
+[connection signal="pressed" from="BoxContainer/play_btn" to="." method="_on_play_btn_pressed"]

@@ -34,6 +34,7 @@ var current_weapon_index = 0
 
 var hp = 10
 
+@onready var sparks_shot = load("res://sparks_shot.tscn")
 
 func _ready() -> void:
 	%camera3p.current = true
@@ -41,6 +42,7 @@ func _ready() -> void:
 	%sniper_rifle_cross.visible = false
 	%vignette.visible = false
 	
+	%hp_txt.text = str(hp)
 	# Початкове приховування зброї
 	for ind in weapons.size():
 		if current_weapon_index != ind:
@@ -114,6 +116,7 @@ func _input(event: InputEvent) -> void:
 			$camera1p.current = true
 			if weapons[current_weapon_index].name == 'rifle':
 				$camera1p.fov = FOV_DEFAULT
+				%camera1p.rotation.x = 0
 				%rifle_cross.visible = true
 			elif weapons[current_weapon_index].name == 'sniper_rifle':
 				$camera1p.fov = FOV_SNIPER
@@ -135,7 +138,12 @@ func _input(event: InputEvent) -> void:
 				
 		if weapons[current_weapon_index].name == 'rifle':
 			if rifle_recharge_timer >= rifle_time_recharge:
-				if  %ray_rifle.is_colliding():
+				if %ray_rifle.is_colliding():
+					# Додавання іскр
+					var inst = sparks_shot.instantiate()
+					inst.position = %ray_rifle.get_collision_point()
+					get_tree().current_scene.add_child(inst)
+					
 					var collide_obj = %ray_rifle.get_collider()
 					if collide_obj.is_in_group('enemy'):
 						collide_obj.damage(rifle_damage_amount)
@@ -145,6 +153,11 @@ func _input(event: InputEvent) -> void:
 		if weapons[current_weapon_index].name == 'sniper_rifle':
 			if sniper_rifle_recharge_timer >= sniper_rifle_recharge:
 				if %ray_sniper_rifle.is_colliding():
+					# Додавання іскр
+					var inst = sparks_shot.instantiate()
+					inst.position = %ray_sniper_rifle.get_collision_point()
+					get_tree().current_scene.add_child(inst)
+					
 					var collide_obj = %ray_sniper_rifle.get_collider()
 					if collide_obj.is_in_group('enemy'):
 						collide_obj.damage(sniper_rifle_damage_amount)
@@ -167,6 +180,7 @@ func _input(event: InputEvent) -> void:
 
 func damage(amount=1):
 	hp -= amount
+	%hp_txt.text = str(hp)
 	if hp <= 0:
 		print("GAME OVER!")
 		get_tree().paused = true

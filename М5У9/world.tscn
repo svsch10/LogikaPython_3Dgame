@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://comrxnj7ys3ks"]
+[gd_scene load_steps=22 format=3 uid="uid://comrxnj7ys3ks"]
 
 [ext_resource type="PackedScene" uid="uid://c4o4d5vvyx8fh" path="res://assets/models/hero.glb" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://178csn7tlyke" path="res://hero.gd" id="1_fj7yv"]
+[ext_resource type="Texture2D" uid="uid://cd6ii3y73bb3y" path="res://assets/textures/SBS - Tiny Texture Pack - 128x128/128x128/Grass/Grass_17-128x128.png" id="1_ic0uy"]
 [ext_resource type="PackedScene" uid="uid://b7d4i6rg87bcw" path="res://house.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://fidq1cnlctdu" path="res://enemy.tscn" id="4_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://c1yc4ldp4dlc4" path="res://assets/aim_cross.png" id="5_036b0"]
@@ -9,11 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://dnf33rk8dwp4a" path="res://assets/aim_cross_sniper.png" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://c4eyxt5vre28b" path="res://assets/models/rifle.glb" id="8_gbfbk"]
 [ext_resource type="Script" uid="uid://bmmi14w3hn8tm" path="res://rifle.gd" id="8_ioo17"]
+[ext_resource type="Texture2D" uid="uid://c6nburs6y1hho" path="res://assets/heart.png" id="9_k3n1d"]
 [ext_resource type="PackedScene" uid="uid://8wbyo5tjiy1f" path="res://assets/models/sniper_rifle.glb" id="10_wse8f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_top_color = Color(0.3281518, 0.43249747, 0.7301033, 1)
+sky_horizon_color = Color(0.5855702, 0.6732065, 0.83416355, 1)
+ground_bottom_color = Color(0.2012034, 0.39312726, 0.30960602, 1)
+ground_horizon_color = Color(0.1913031, 0.5054822, 0.2704546, 1)
 
 [sub_resource type="Sky" id="Sky_fj7yv"]
 sky_material = SubResource("ProceduralSkyMaterial_f3sb7")
@@ -26,6 +30,8 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
 albedo_color = Color(0.1764706, 0.4862745, 0.09019608, 1)
+albedo_texture = ExtResource("1_ic0uy")
+uv1_scale = Vector3(30, 30, 30)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fj7yv"]
 material = SubResource("StandardMaterial3D_tlwt5")
@@ -160,6 +166,23 @@ offset_bottom = 59.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_pkg7o")
+
+[node name="heart_img" type="TextureRect" parent="HUD"]
+offset_left = 35.0
+offset_top = 31.0
+offset_right = 101.0
+offset_bottom = 97.0
+texture = ExtResource("9_k3n1d")
+expand_mode = 1
+
+[node name="hp_txt" type="Label" parent="HUD"]
+unique_name_in_owner = true
+offset_left = 137.0
+offset_top = 28.0
+offset_right = 177.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 46
+text = "0"
 
 [node name="rifle" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0336196, 0.8565221, 3.362547)

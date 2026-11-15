@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://65c5qw2w3d6u"]
+
+[ext_resource type="Script" uid="uid://b5hluug7s25d3" path="res://sparks_shot.gd" id="1_qgmmo"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i4ael"]
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qgmmo"]
+emission_enabled = true
+emission = Color(0.8007231, 0.8237829, 0.4468798, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_v2ixl"]
+material = SubResource("StandardMaterial3D_qgmmo")
+radius = 0.03
+height = 0.06
+
+[node name="sparks_shot" type="GPUParticles3D"]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_i4ael")
+draw_pass_1 = SubResource("SphereMesh_v2ixl")
+script = ExtResource("1_qgmmo")
